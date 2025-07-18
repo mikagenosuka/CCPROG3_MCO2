@@ -40,7 +40,7 @@ public class Sunflower extends Plant {
         } else {
             model.spawnSunToken(new SunToken(row, col));
             generateCooldown = speed;
-            System.out.println("Sunflower at (" + row + "," + col + ") generated a Sun Token.");
+            System.out.println("Sunflower at (" + row + "," + col + ") generated 25 sun.");
         }
     }
 

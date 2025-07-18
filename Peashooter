@@ -25,7 +25,7 @@ public abstract class Peashooter extends Plant {
     /* Behaviors */
 
     /**
-     * Identifies the nearest zombie in front of the Peashooter on the same row.
+     * Identifies the nearest zombie in front of the Peashooter on the same row
      *
      * @param model the current GameModel to scan for zombies
      * @return the first zombie found in the same row, or null if none found
@@ -42,7 +42,7 @@ public abstract class Peashooter extends Plant {
 
     /**
      * Performs the attack action for the Peashooter. If cooldown is done
-     * and a zombie is in range, fires a projectile (defined by subclass).
+     * and a zombie is in range, fires a projectile (defined by subclass)
      *
      * @param model the current GameModel to interact with
      */
@@ -61,14 +61,14 @@ public abstract class Peashooter extends Plant {
     }
 
     /**
-     * Abstract method for firing a projectile — must be implemented by subclasses.
+     * Abstract method for firing a projectile — must be implemented by subclasses
      *
      * @param model the current GameModel to add the projectile to
      */
     protected abstract void fireProjectile(GameModel model);
 
     /**
-     * Reduces Peashooter's health by the damage received.
+     * Reduces Peashooter's health by the damage received
      *
      * @param dmg amount of damage from a zombie
      */
@@ -77,7 +77,7 @@ public abstract class Peashooter extends Plant {
     }
 
     /**
-     * Checks if the Peashooter is dead.
+     * Checks if the Peashooter is dead
      *
      * @return true if health is 0 or below
      */
@@ -86,7 +86,7 @@ public abstract class Peashooter extends Plant {
     }
 
     /**
-     * Returns the current health of the Peashooter.
+     * Returns the current health of the Peashooter
      *
      * @return health value
      */

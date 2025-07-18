@@ -1,0 +1,68 @@
+/** The class SnowPea represents a projectile fired by a Snow Peashooter.
+  *
+  * @author Darryl Ac-ac & Brian Garcia
+  * @version 1.1
+  */
+
+public class SnowPea {
+    private int row;
+    private int col;
+    private boolean active = true; // Active until it hits a zombie or leaves the board
+    private static final int DAMAGE = 20;
+
+    /** This constructor initializes the row and column
+     * of the spawned SnowPea
+     * 
+     * @param row row the SnowPea spawns in
+     * @param col column the SnowPea spawns in
+     */
+    public SnowPea(int row, int col) {
+        this.row = row;
+        this.col = col;
+    }
+
+    /** This method moves the SnowPea one tile to the right
+     * every tick. If it hits a zombie, it deals damage and
+     * applies a slow effect before deactivating
+     * 
+     * @param model the GameModel to scan for zombies
+     */
+    public void move(GameModel model) {
+        if (!active) return;
+        col++; // Move one tile to the right
+        // Check if SnowPea went off the board
+        if (col >= GameModel.COLS) {
+            active = false;
+            return;
+        }
+
+        // Check if a Zombie has been hit
+        Tile tile = model.getTile(row, col);
+        Zombie zombie = tile.getZombie();
+
+        if (zombie != null) {
+            zombie.takeDamage(DAMAGE);
+            zombie.slow(); // Applies slow effect on Zombie
+            active = false;
+            System.out.println("SnowPea hit and slowed zombie at (" + row + "," + col + ")");
+        }
+    }
+
+    /**
+     * Returns whether this snow pea is still active.
+     * 
+     * @return true if the pea is still active; false if it has already hit or expired
+     */
+    public boolean isActive() {
+        return active;
+    }
+
+    /** These method checks for the
+     * current row and col of the SnowPea
+     * 
+     * @return row 
+     * @return col
+     */
+    public int getRow() { return row; }
+    public int getCol() { return col; }
+}

@@ -1,0 +1,82 @@
+/** The class Sunflower represents a plant 
+ * that can be planted by the player.
+  *
+  * @author Darryl Ac-ac & Brian Garcia
+  * @version 1.1
+  */
+
+public class Sunflower extends Plant {
+    private int health = 80;
+    private final int sunGenerated = 25; // Generates 25 sun
+    private final int cooldownTime = 5; // generates every 5 ticks
+    private int cooldownCounter = 0;
+
+
+    /** This constructor initializes the row and column of the Sunflower,
+     * utilizing the abstract, Plant
+
+       @param row row the plant is to be planted at
+       @param col column the Sunflower is to be planted at
+   */	
+
+    public Sunflower(int row, int col) {
+        super(row, col);
+    }
+
+    /* METHODS */
+    
+    /* behaviors */
+
+    /** This method produces Sun on the field
+     * Utilizes the Sun entity class
+   */	
+
+    @Override
+    public void performAction(GameModel model) {
+        if (cooldownCounter <= 0) {
+            SunToken sun = new SunToken(row, col);
+            model.addSunToken(sun); // sun is placed in this tile
+            cooldownCounter = cooldownTime;
+            System.out.println("Sunflower at (" + row + "," + col + ") dropped a sun.");
+        } else {
+            cooldownCounter--;
+        }
+    }
+
+    /** This method returns how much
+     * Sun the Sunflower costs
+     * 
+     * @return Sun cost
+   */	
+    @Override
+    public int getCost() {
+        return 50;
+    }
+
+    /** This method reduces damage taken to
+     * the Sunflower's total hp
+     * 
+     * @param dmg amount of dmg taken from Zombie
+   */	
+    public void takeDamage(int dmg) {
+        this.health -= dmg;
+    }
+
+    /** This method checks if Sunflower
+     * is dead
+     * 
+     * @return TRUE if plant is dead
+   */	
+    public boolean isDead() {
+        return this.health <= 0;
+    }
+
+    /** This method returns the health
+     * of the Sunflower
+     * 
+     * @return current health
+   */	
+    public int getHealth() {
+        return this.health;
+    }
+}

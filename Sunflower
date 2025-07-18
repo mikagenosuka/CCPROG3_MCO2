@@ -6,76 +6,82 @@
   */
 
 public class Sunflower extends Plant {
-    private int health = 80;
-    private final int sunGenerated = 25; // Generates 25 sun
-    private final int cooldownTime = 5; // generates every 5 ticks
-    private int cooldownCounter = 0;
 
+    private int generateCooldown = 0; // Timer until next SunToken
 
-    /** This constructor initializes the row and column of the Sunflower,
-     * utilizing the abstract, Plant
-
-       @param row row the plant is to be planted at
-       @param col column the Sunflower is to be planted at
-   */	
-
+    /** This constructor initializes the Sunflower's position
+     * and all required plant attributes
+     * 
+     * @param row row where the Sunflower is planted
+     * @param col column where the Sunflower is planted
+     */
     public Sunflower(int row, int col) {
         super(row, col);
+
+        // Required attributes per spec
+        this.cost = 50;
+        this.regenerateRate = 5;
+        this.damage = 0;          // Does not perform attacks
+        this.directDamage = 0;
+        this.health = 80;
+        this.range = 0;
+        this.speed = 5;           // Generates sun every 5 ticks
     }
 
-    /* METHODS */
-    
-    /* behaviors */
-
-    /** This method produces Sun on the field
-     * Utilizes the Sun entity class
-   */	
-
+    /** This method is called every tick.
+     * If cooldown reaches 0, spawns a SunToken and resets timer
+     * 
+     * @param model the GameModel where the sun is spawned
+     */
     @Override
     public void performAction(GameModel model) {
-        if (cooldownCounter <= 0) {
-            SunToken sun = new SunToken(row, col);
-            model.addSunToken(sun); // sun is placed in this tile
-            cooldownCounter = cooldownTime;
-            System.out.println("Sunflower at (" + row + "," + col + ") dropped a sun.");
+        if (generateCooldown > 0) {
+            generateCooldown--;
         } else {
-            cooldownCounter--;
+            model.spawnSunToken(new SunToken(row, col));
+            generateCooldown = speed;
+            System.out.println("Sunflower at (" + row + "," + col + ") generated a Sun Token.");
         }
     }
 
-    /** This method returns how much
-     * Sun the Sunflower costs
+    /** This method applies damage to the Sunflower
+     * from attacking zombies
      * 
-     * @return Sun cost
-   */	
+     * @param dmg amount of damage received
+     */
     @Override
-    public int getCost() {
-        return 50;
-    }
-
-    /** This method reduces damage taken to
-     * the Sunflower's total hp
-     * 
-     * @param dmg amount of dmg taken from Zombie
-   */	
     public void takeDamage(int dmg) {
         this.health -= dmg;
     }
 
-    /** This method checks if Sunflower
-     * is dead
+    /** This method returns TRUE if the Sunflower is dead
      * 
-     * @return TRUE if plant is dead
-   */	
+     * @return true if health is 0 or less
+     */
+    @Override
     public boolean isDead() {
-        return this.health <= 0;
+        return health <= 0;
     }
 
-    /** This method returns the health
-     * of the Sunflower
+    /** This method returns the Sunflower's health
      * 
      * @return current health
-   */	
+     */
+    @Override
+    public int getHealth() {
+        return health;
+    }
+
+    /** This method returns the cost of planting the Sunflower
+     * 
+     * @return sun cost
+     */
+    @Override
+    public int getCost() {
+        return cost;
+    }
+}
+
     public int getHealth() {
         return this.health;
     }

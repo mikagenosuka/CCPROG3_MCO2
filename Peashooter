@@ -18,7 +18,7 @@ public class Peashooter extends Plant {
      * utilizing the abstract, Plant
 
        @param row row the plant is to be planted at
-       @param col column the Sunflower is to be planted at
+       @param col column the plant is to be planted at
    */	
 
     public Peashooter(int row, int col) {

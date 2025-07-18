@@ -1,0 +1,40 @@
+/** The subclass SnowPeashooter represents a plant
+ * that can be planted by the player
+  *
+  * @author Darryl Ac-ac & Brian Garcia
+  * @version 1.1
+  */
+
+public class SnowPeashooter extends Peashooter {
+
+    /** This constructor initializes the row and column
+     * of the SnowPeashooter
+     * 
+     * @param row row the plant is placed
+     * @param col column the plant is placed
+     */
+    public SnowPeashooter(int row, int col) {
+        super(row, col);
+    }
+
+    /** This method fires a SnowPea projectile 
+     * from the tile right of the SnowPeashooter
+     * 
+     * @param model the GameModel being used
+     */
+    @Override
+    protected void fireProjectile(GameModel model) {
+        model.addPea(new SnowPea(row, col + 1)); // starts one tile to the right
+        System.out.println("Snow Peashooter at (" + row + "," + col + ") fired a snow pea.");
+    }
+
+    /** This method returns the Sun cost
+     * of the SnowPeashooter
+     * 
+     * @return 175 Sun
+     */
+    @Override
+    public int getCost() {
+        return 175;
+    }
+}

@@ -1,0 +1,37 @@
+/** The abstract Plant represents the superclass at which all
+ * plants derive from
+  *
+  * @author Darryl Ac-ac & Brian Garcia
+  * @version 1.1
+  */
+
+
+public abstract class Plant {
+    protected int row; // Row at which the plant is found
+    protected int col; // Column at which the plant is found
+
+    // Opted to only declare a plant with location given all plants have unique attributes
+
+    /** This constructor initializes the row and column of the plant
+
+       @param row row the plant is to be planted at
+       @param col column the Sunflower is to be planted at
+   */	
+
+    public Plant(int row, int col) {
+        this.row = row;
+        this.col = col;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public abstract void performAction(GameModel model);
+
+    public abstract int getCost();
+}

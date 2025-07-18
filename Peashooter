@@ -1,59 +1,36 @@
-/** The subclass Peashooter represents a plant
- * that can be planted by the player
+/** The abstract Peashooter represents the superclass at which all
+ * peashooter variations derive from derive from
   *
   * @author Darryl Ac-ac & Brian Garcia
   * @version 1.1
   */
+  
 
+public abstract class Peashooter extends Plant {
+    protected int health = 100;          // Base health of all variants
+    protected final int damage = 20;     // Base attack of all variants
+    protected final int cooldownTime = 3; // Base interval between attacks
+    protected int attackCooldown = 0;     // Timer until next attack
 
-public class Peashooter extends Plant {
-    private int health = 100;
-    private final int damage = 20;
-    private final int cooldownTime = 3;  // shoots every 3 ticks
-    private int attackCooldown = 0;
-
-    /* CONSTRUCTORS */
-
-    /** This constructor initializes the row and column of the peashooter,
-     * utilizing the abstract, Plant
-
-       @param row row the plant is to be planted at
-       @param col column the plant is to be planted at
-   */	
-
+    /**
+     * Initializes the Peashooter's position by calling the superclass Plant constructor.
+     *
+     * @param row the row where the plant is placed
+     * @param col the column where the plant is placed
+     */
     public Peashooter(int row, int col) {
         super(row, col);
     }
 
-    /* METHODS */
-    
-    /* behaviors */
+    /* Behaviors */
 
-    /** This method produces attacks a Zombie indentified by
-     * identifyZombie
-   */	
-    @Override
-    public void performAction(GameModel model) {
-        if (attackCooldown > 0) {
-            attackCooldown--;
-            return;
-        }
-
-        Pea newPea = new Pea(row, col + 1, damage); // starts just to the right
-        model.addPea(newPea);
-        attackCooldown = cooldownTime;
-        System.out.println("Peashooter at (" + row + "," + col + ") fired a pea.");
-    }
-
-    /* METHODS */
-    
-    /* behaviors */
-
-    /** This method identifies the closest Zombie on the same row
-     * 
-     * @return Zombie
-   */	
-    private Zombie identifyZombie(GameModel model) {
+    /**
+     * Identifies the nearest zombie in front of the Peashooter on the same row.
+     *
+     * @param model the current GameModel to scan for zombies
+     * @return the first zombie found in the same row, or null if none found
+     */
+    protected Zombie identifyZombie(GameModel model) {
         for (int c = col + 1; c < GameModel.COLS; c++) {
             Zombie zombie = model.getTile(row, c).getZombie();
             if (zombie != null) {
@@ -63,41 +40,59 @@ public class Peashooter extends Plant {
         return null;
     }
 
-    /** This method returns how much
-     * Sun the Peashooter costs
-     * 
-     * @return Sun cost
-   */	
+    /**
+     * Performs the attack action for the Peashooter. If cooldown is done
+     * and a zombie is in range, fires a projectile (defined by subclass).
+     *
+     * @param model the current GameModel to interact with
+     */
     @Override
-    public int getCost() {
-        return 100; // sun cost to place
+    public final void performAction(GameModel model) {
+        if (attackCooldown > 0) {
+            attackCooldown--;
+            return;
+        }
+
+        Zombie target = identifyZombie(model);
+        if (target != null) {
+            fireProjectile(model); // subclass defines what projectile to shoot
+            attackCooldown = cooldownTime;
+        }
     }
 
-    /** This method reduces damage taken to
-     * the Peashooter's total hp
-     * 
-     * @param dmg amount of dmg taken from Zombie
-   */	
+    /**
+     * Abstract method for firing a projectile — must be implemented by subclasses.
+     *
+     * @param model the current GameModel to add the projectile to
+     */
+    protected abstract void fireProjectile(GameModel model);
+
+    /**
+     * Reduces Peashooter's health by the damage received.
+     *
+     * @param dmg amount of damage from a zombie
+     */
     public void takeDamage(int dmg) {
         this.health -= dmg;
     }
 
-    /** This method checks if Peashooter
-     * is dead
-     * 
-     * @return TRUE if plant is dead
-   */	
+    /**
+     * Checks if the Peashooter is dead.
+     *
+     * @return true if health is 0 or below
+     */
     public boolean isDead() {
-        return this.health <= 0;
+        return health <= 0;
     }
 
-        /** This method returns the health
-         * of the Peashooter
-         * 
-         * @return current health
-     */	
+    /**
+     * Returns the current health of the Peashooter.
+     *
+     * @return health value
+     */
     public int getHealth() {
-        return this.health;
+        return health;
     }
 }
+
 

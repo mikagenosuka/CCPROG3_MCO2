@@ -1,0 +1,104 @@
+/** The subclass Peashooter represents a plant
+ * that can be planted by the player
+  *
+  * @author Darryl Ac-ac & Brian Garcia
+  * @version 1.1
+  */
+
+
+public class Peashooter extends Plant {
+    private int health = 100;
+    private final int damage = 20;
+    private final int cooldownTime = 3;  // shoots every 3 ticks
+    private int attackCooldown = 0;
+
+    /* CONSTRUCTORS */
+
+    /** This constructor initializes the row and column of the peashooter,
+     * utilizing the abstract, Plant
+
+       @param row row the plant is to be planted at
+       @param col column the Sunflower is to be planted at
+   */	
+
+    public Peashooter(int row, int col) {
+        super(row, col);
+    }
+
+    /* METHODS */
+    
+    /* behaviors */
+
+    /** This method produces attacks a Zombie indentified by
+     * identifyZombie
+   */	
+    @Override
+    public void performAction(GameModel model) {
+        if (attackCooldown > 0) {
+            attackCooldown--;
+            return;
+        }
+
+        Zombie target = identifyZombie(model);
+        if (target != null) {
+            target.takeDamage(damage);
+            attackCooldown = cooldownTime;
+            System.out.println("Peashooter at (" + row + "," + col + ") shot zombie at (" + target.getRow() + "," + target.getCol() + ")");
+        }
+    }
+
+    /* METHODS */
+    
+    /* behaviors */
+
+    /** This method identifies the closest Zombie on the same row
+     * 
+     * @return Zombie
+   */	
+    private Zombie identifyZombie(GameModel model) {
+        for (int c = col + 1; c < GameModel.COLS; c++) {
+            Zombie zombie = model.getTile(row, c).getZombie();
+            if (zombie != null) {
+                return zombie;
+            }
+        }
+        return null;
+    }
+
+    /** This method returns how much
+     * Sun the Peashooter costs
+     * 
+     * @return Sun cost
+   */	
+    @Override
+    public int getCost() {
+        return 100; // sun cost to place
+    }
+
+    /** This method reduces damage taken to
+     * the Peashooter's total hp
+     * 
+     * @param dmg amount of dmg taken from Zombie
+   */	
+    public void takeDamage(int dmg) {
+        this.health -= dmg;
+    }
+
+    /** This method checks if Peashooter
+     * is dead
+     * 
+     * @return TRUE if plant is dead
+   */	
+    public boolean isDead() {
+        return this.health <= 0;
+    }
+
+    /** This method returns the health
+     * of the Peashooter
+     * 
+     * @return current health
+   */	
+    public int getHealth() {
+        return this.health;
+    }
+}

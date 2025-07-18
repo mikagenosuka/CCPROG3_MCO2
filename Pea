@@ -1,0 +1,69 @@
+/** The class Suntoken represents a Sun Token
+ * that can be clicked and retrieved by the player 
+  *
+  * @author Darryl Ac-ac & Brian Garcia
+  * @version 1.1
+  */
+
+public class Pea {
+    private int row;
+    private int col;
+    private final int speed = 1; // moves 1 tile per tick
+    private static final int DAMAGE = 20;
+    private boolean active = true;
+
+    /* CONSTRUCTORS */
+
+    /** This constructor initializes the row and column of the pea being shot
+
+       @param row row the pea is shot from
+       @param col column the pea is shot from
+   */	
+    public Pea(int row, int col) {
+        this.row = row;
+        this.col = col;
+    }
+
+    /* METHODS */
+    
+    /* behaviors */
+
+    /** This method moves the pea one tile to the right per tick
+   */	
+    public void move(GameModel model) {
+        if (!active) return;
+
+        col += speed;
+        if (col >= GameModel.COLS) {
+            active = false;
+            return;
+        }
+
+        Tile tile = model.getTile(row, col);
+        Zombie zombie = tile.getZombie();
+        if (zombie != null) {
+            zombie.takeDamage(DAMAGE);
+            active = false;
+            System.out.println("Pea hit zombie at (" + row + "," + col + ") for " + DAMAGE + " damage.");
+        }
+    }
+
+    /** This method returns True
+     * if the pea has yet to hit a Zombie
+     * or leave the board
+     * 
+     * @return active
+   */	
+    public boolean isActive() {
+        return active;
+    }
+
+    /** These methods return the current row
+     * and col of the pea that has been shot
+     * 
+     * @return row; current
+     * @return col; current
+   */	
+    public int getRow() { return row; }
+    public int getCol() { return col; }
+}

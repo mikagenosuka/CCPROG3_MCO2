@@ -24,6 +24,16 @@ public class SunToken {
         this.collected = false; // Removed from the board if true
     }
 
+    /** This constructor initializes the hitbox of the 
+     * SunToken
+
+       @param x x coordinate
+       @param y y coordinate
+   */	
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, 40, 40); // hitbox for click detection
+    }
+
     /* METHODS */
     
     /* behaviors */
@@ -73,3 +83,4 @@ public class SunToken {
     public int getRow() { return row; }
     public int getCol() { return col; }
 }
+

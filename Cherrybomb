@@ -3,7 +3,7 @@
  * One time use.
   *
   * @author Darryl Ac-ac & Brian Garcia
-  * @version 1.1
+  * @version 1.3
   */
 
 public class CherryBomb extends Plant {
@@ -28,6 +28,7 @@ public class CherryBomb extends Plant {
         this.health = 999;         // Not meant to be attacked
         this.range = 1;            // Affects adjacent tiles (1 tile radius = 3×3)
         this.speed = 0;            // One time use
+        this.coolDown = 50;
     }
 
     /** This method performs CherryBomb’s explosion
@@ -98,4 +99,14 @@ public class CherryBomb extends Plant {
     public int getCost() {
         return cost;
     }
+
+    /** This method returns the cooldown of planting the Cherrybomb
+     * 
+     * @return cooldown
+     */
+    @Override
+    public int getCooldown() {
+        return coolDown;
+    }
+
 }

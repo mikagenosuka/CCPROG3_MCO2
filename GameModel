@@ -121,8 +121,6 @@ public class GameModel {
         return null;
     }
 
-    //CONTINUE HERE
-
     /* Check if plant can be placed */
     public boolean canPlacePlant(String type, int currentTime) {
         int nextAvailable = plantCooldowns.getOrDefault(type, 0); // Check map created for curr cd

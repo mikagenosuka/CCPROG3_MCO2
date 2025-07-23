@@ -24,6 +24,7 @@
         this.health = 300;         // Very tanky
         this.range = 0;
         this.speed = 0;            // No active behavior
+        this.coolDown = 30;
     }
 
     /**
@@ -77,4 +78,14 @@
     public int getCost() {
         return cost;
     }
+
+    /** This method returns the cooldown of planting the Wallnut
+     * 
+     * @return cooldown
+     */
+    @Override
+    public int getCooldown() {
+        return coolDown;
+    }
 }
+

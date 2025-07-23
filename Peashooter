@@ -2,7 +2,7 @@
  * peashooter variations derive from derive from
   *
   * @author Darryl Ac-ac & Brian Garcia
-  * @version 1.4
+  * @version 1.3
   */
   
 
@@ -108,6 +108,15 @@ public abstract class Peashooter extends Plant {
     @Override
     public int getCost() {
         return cost;
+    }
+
+    /** This method returns the cooldown of planting the Peashooter
+     * 
+     * @return cooldown
+     */
+    @Override
+    public int getCooldown() {
+        return coolDown;
     }
 }
 

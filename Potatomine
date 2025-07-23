@@ -28,6 +28,7 @@
         this.health = 999;         // Cannot be eaten
         this.range = 0;            // Only affects own tile
         this.speed = 0;            // Not reusable
+        this.coolDown = 30; 
     }
 
     /** This method runs each tick.
@@ -102,4 +103,15 @@ public void takeDamage(int dmg) {
     public int getCost() {
         return cost;
     }
+
+    /** This method returns the cooldown of planting the Potatomine
+     * 
+     * @return cooldown
+     */
+    @Override
+    public int getCooldown() {
+        return coolDown;
+    }
+
 }
+

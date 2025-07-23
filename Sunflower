@@ -26,6 +26,7 @@ public class Sunflower extends Plant {
         this.health = 80;
         this.range = 0;
         this.speed = 5;           // Generates sun every 5 ticks
+        this.coolDown = 8;
     }
 
     /** This method is called every tick.
@@ -40,7 +41,7 @@ public class Sunflower extends Plant {
         } else {
             model.spawnSunToken(new SunToken(row, col));
             generateCooldown = speed;
-            System.out.println("Sunflower at (" + row + "," + col + ") generated 25 sun.");
+            System.out.println("Sunflower at (" + row + "," + col + ") generated 25 Sun.");
         }
     }
 
@@ -80,9 +81,15 @@ public class Sunflower extends Plant {
     public int getCost() {
         return cost;
     }
-}
 
-    public int getHealth() {
-        return this.health;
+    /** This method returns the cooldown of planting the Sunflower
+     * 
+     * @return cooldown
+     */
+    @Override
+    public int getCooldown() {
+        return coolDown;
     }
+
+
 }

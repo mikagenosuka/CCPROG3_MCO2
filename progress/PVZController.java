@@ -3,7 +3,16 @@ import java.awt.event.ActionListener;
 
 public class PVZController implements ActionListener {
 	
-	
+	// with gamemodel
+	/*public PVZController(PVZGUI gui, GameModel model) {
+		this.gui = gui;
+		this.model = model;
+
+		updateView();
+
+		gui.setActionListener(this);
+	} */
+
 	public PVZController(PVZGUI gui) {
 		this.gui = gui;
 
@@ -13,8 +22,9 @@ public class PVZController implements ActionListener {
 	}
 
 	public void updateView() {
-		
-
+		//repaint();
+		//where updating of values would be visible in gui
+		//calling of set sunamount time etc
 
 	}
 
@@ -32,6 +42,6 @@ public class PVZController implements ActionListener {
 	}
 
 	
-	private PVZGUI gui;  // View
-						// Model
+	private PVZGUI gui;  		// View
+	//private GameModel model		// Model
 }

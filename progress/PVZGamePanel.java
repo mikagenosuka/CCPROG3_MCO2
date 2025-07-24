@@ -8,7 +8,7 @@ class PVZGamePanel extends JPanel {
         //setBackground(new Color.decode("#245d1f"));
     }
 
-    ImageIcon zomb = new ImageIcon("sprites/zomb.png"); // should be in the class
+    ImageIcon zomb = new ImageIcon("sprites/icy.png"); // should be in the classes instead
 	Image image = zomb.getImage().getScaledInstance(64, 128, Image.SCALE_SMOOTH);
 	//zomb = new ImageIcon(image);
 
@@ -25,11 +25,31 @@ class PVZGamePanel extends JPanel {
                 g.setColor(Color.BLACK);
                 g.drawRect(col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE);
                 // Draw plant/zombie if exists (placeholder)
-                g.drawImage(image, 128 + col * 256, 128 + row * 256, this);
-                g.drawImage(image2, 128 + col * 256, 256 * row, this);
+                //g.drawImage(image, 128 + col * 256, 128 + row * 256, this);
+               // g.drawImage(image2, 128 + col * 256, 256 * row, this); //should be based on
+                                                                        // tile size
                 
             }
 		}
+
+        for (int row = 0; row < ROWS; row++) { // plants?
+            for (int col = 0; col < COLS; col++) {
+                // Draw plant/zombie if exists (placeholder)
+                //g.drawImage(image, 128 + col * 256, 128 + row * 256, this);
+                g.drawImage(image2, col * 128, 128 * row, this); //should be based on
+                                                                        // tile size
+                g.drawImage(image, 0 + col * 128, 64 + row * 128, this);
+            }
+		}
+
+       /* for (int row = 0; row < ROWS; row++) { //zombies?
+            for (int col = 0; col < COLS; col++) {
+                g.drawImage(image, 0 + col * 128, 64 + row * 128, this);
+                //g.drawImage(image2, 128 + col * 256, 256 * row, this); //should be based on
+                                                             // tile size & the actual instantiated
+                                                            // zombies/plants  
+            }
+		}*/
 
        //  g.drawImage(image2, 0, 64, this);
        // g.drawImage(image, 64, 0, this);

@@ -1,0 +1,117 @@
+/** The class Potatomine represents a plant 
+ * that can be planted by the player. 
+ * One time use.
+  *
+  * @author Darryl Ac-ac & Brian Garcia
+  * @version 1.1
+  */
+  public class PotatoMine extends Plant {
+
+    private boolean armed = false;  // Whether the mine is active
+    private boolean exploded = false; // Whether the mine has been used
+    private int armTimer = 2;       // Time until it becomes armed
+
+    /** This constructor initializes the PotatoMine
+     * and sets all required plant attributes
+     * 
+     * @param row the row where it is planted
+     * @param col the column where it is planted
+     */
+    public PotatoMine(int row, int col) {
+        super(row, col);
+
+        // Required attributes (even if unused)
+        this.sunCost = 25;
+        this.regenerateRate = 5;
+        this.damage = 180;         // Area or outer tile damage
+        this.directDamage = 250;   // Center tile bonus damage
+        this.health = 999;         // Cannot be eaten
+        this.range = 0;            // Only affects own tile
+        this.speed = 0;            // Not reusable
+        this.coolDown = 30; 
+    }
+
+    /** This method runs each tick.
+     * It checks if the mine is ready to explode and
+     * whether a zombie is on its tile.
+     * 
+     * @param model the GameModel being updated
+     */
+    @Override
+    public void performAction(GameModel model) {
+        if (exploded) return;
+
+        if (!armed) {
+            if (armTimer > 0) {
+                armTimer--;
+            } else {
+                armed = true;
+                System.out.println("Potato Mine at (" + row + "," + col + ") is now ready.");
+            }
+        } else {
+            Zombie z = model.getTile(row, col).getZombie();
+            if (z != null) {
+                z.takeDamage(directDamage);
+                exploded = true;
+                System.out.println("Potato Mine at (" + row + "," + col + ") exploded on zombie for " + directDamage + " damage.");
+            }
+        }
+    }
+
+    /** This method is only used while
+     * the mine has yet to be armed.
+     * 
+     * @param dmg damage 
+     */
+    @Override
+public void takeDamage(int dmg) {
+    if (!armed) {
+        this.health -= dmg;
+        if (health <= 0) {
+            exploded = true; // Destroyed before activating
+            System.out.println("Potato Mine was eaten before arming.");
+        }
+    }
+    // If armed, do not take damage — zombie should trigger explosion instead
+}
+
+    /** This method checks if the mine has already exploded
+     * and ready to be removed
+     * 
+     * @return TRUE if mine has exploded
+     */
+    @Override
+    public boolean isDead() {
+        return exploded;
+    }
+
+    /** This method returns the mine's health
+     * Only used while the mine is not yet armed.
+     * 
+     * @return static high health
+     */
+    @Override
+    public int getHealth() {
+        return health;
+    }
+
+    /** This method returns the sun cost of the mine
+     * 
+     * @return 25
+     */
+    @Override
+    public int getCost() {
+        return sunCost;
+    }
+
+    /** This method returns the cooldown of planting the Potatomine
+     * 
+     * @return cooldown
+     */
+    @Override
+    public int getCooldown() {
+        return coolDown;
+    }
+
+}
+

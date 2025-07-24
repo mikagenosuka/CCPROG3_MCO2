@@ -74,9 +74,9 @@ public class PVZGUI extends JFrame {
 		
 		this.add(panelNorth, BorderLayout.NORTH); */
 		
-		ImageIcon back = new ImageIcon("sprites/PotatoMine.png");
-		Image image = back.getImage().getScaledInstance(60, 40, Image.SCALE_SMOOTH);
-		back = new ImageIcon(image);
+		ImageIcon sunIcon = new ImageIcon("sprites/sunIcon.png");
+		Image image = sunIcon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+		sunIcon = new ImageIcon(image);
 		
 		ImageIcon peapea = new ImageIcon("sprites/peapea.png");
 		image = peapea.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
@@ -106,7 +106,7 @@ public class PVZGUI extends JFrame {
 		//sunPanel.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
 		sunPanel.setBackground(Color.decode("#f6b32e"));
 		
-		JLabel testIMG = new JLabel(back);
+		JLabel testIMG = new JLabel(sunIcon);
 		//testIMG.setForeground(Color.WHITE);
 		gbc.gridx = 0;
 		gbc.gridy = 0;

@@ -1,9 +1,17 @@
-public class Tile extends JButton { // not functioning its hsould not be a  button
+public class Tile { 
 	public Tile (int row, int col) {
 		this.row = row;
 		this.col = col;
 	}
 	
+	public int getRow() {//?
+		return row;
+	}
+
+	public int getCol() {//?
+		return col;
+	}
+
 	private int row;
 	private int col;
 }

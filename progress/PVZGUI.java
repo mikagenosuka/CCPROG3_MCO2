@@ -195,13 +195,13 @@ public class PVZGUI extends JFrame {
 		panelEast.add(btnNext);
 		
 		this.add(panelEast, BorderLayout.EAST); */
-		/*
-		// CENTER PANEL
-		JPanel panelCenter = new JPanel();
-		panelCenter.setLayout(new GridLayout(5, 9, 0, 0)); // row, col, spacing, spacing
-		panelCenter.setBackground(Color.decode("#245d1f"));
 		
-		for (int i = 0; i < 5; i++){
+		// CENTER PANEL (buncha buttons)
+	//	JPanel panelCenter = new JPanel();
+	//	panelCenter.setLayout(new GridLayout(5, 9, 0, 0)); // row, col, spacing, spacing
+	//	panelCenter.setBackground(Color.decode("#245d1f"));
+		
+		/*for (int i = 0; i < 5; i++){
 			for (int j = 0; j < 10; j++) {
 				tile = new JButton("Tile " + (i + 1) + ", " + j, zomb);
 				tile.setOpaque(false);
@@ -210,11 +210,11 @@ public class PVZGUI extends JFrame {
 				
 				panelCenter.add(tile);
 			}
-		}
+		}*/
 		
 		//Arraylist<Tile> tiles = new ArrayList<>();
 		 
-		for (int i = 0; i < 5; i++){
+	/* 	for (int i = 0; i < 5; i++){
 			for (int j = 0; j < 9; j++) {
 				tile = new JButton("Tile " + (i + 1) + ", " + j, zomb);
 				tile.setOpaque(false);
@@ -223,19 +223,21 @@ public class PVZGUI extends JFrame {
 				
 				panelCenter.add(tile);
 			}
-		}
+		}*/
 		
 		//tile.setIconImage(zomb.getImage());
 		//panelCenter.add(tile);
 		
-		this.add(panelCenter, BorderLayout.CENTER); 	*/
+		//this.add(panelCenter, BorderLayout.CENTER); 	
+	//	gamePanel.add(panelCenter); 	
+
 
 		// SOUTH PANEL (Wave Indicator)
 		JPanel panelSouth = new JPanel();
 		panelSouth.setLayout(new FlowLayout());
 		panelSouth.setBackground(Color.decode("#245d1f"));
 		
-		timeTime = new JLabel("??? SECS LEFT");
+		timeTime = new JLabel("??? SECS LEFT ");
 		timeTime.setForeground(Color.WHITE);
 		timeTime.setFont(new Font("Bell MT", Font.BOLD, 20));
 		panelSouth.add(timeTime);
@@ -256,12 +258,15 @@ public class PVZGUI extends JFrame {
 		cherryBomb.addActionListener(listener);
 		potatoMine.addActionListener(listener);
 		shovel.addActionListener(listener);
-
 	}
-	
+
 	public void setWaveTime(int timeidk) {
 		waveTime.setText("WAVE IN: " + timeidk);
 	}
+
+	/*public void setSunAmount(int sunAmount) {
+		this.sunAmount = sunAmount;
+	}*/
 
 	private PVZGamePanel gamePanel;
 

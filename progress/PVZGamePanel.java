@@ -8,7 +8,7 @@ class PVZGamePanel extends JPanel {
         //setBackground(new Color.decode("#245d1f"));
     }
 
-    ImageIcon zomb = new ImageIcon("sprites/zomb.png");
+    ImageIcon zomb = new ImageIcon("sprites/zomb.png"); // should be in the class
 	Image image = zomb.getImage().getScaledInstance(64, 128, Image.SCALE_SMOOTH);
 	//zomb = new ImageIcon(image);
 
@@ -25,11 +25,14 @@ class PVZGamePanel extends JPanel {
                 g.setColor(Color.BLACK);
                 g.drawRect(col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE);
                 // Draw plant/zombie if exists (placeholder)
+                g.drawImage(image, 128 + col * 256, 128 + row * 256, this);
+                g.drawImage(image2, 128 + col * 256, 256 * row, this);
+                
             }
 		}
 
-         g.drawImage(image2, 0, 64, this);
-        g.drawImage(image, 64, 0, this);
+       //  g.drawImage(image2, 0, 64, this);
+       // g.drawImage(image, 64, 0, this);
 	}
 
     private static final int ROWS = 5;

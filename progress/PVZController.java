@@ -31,6 +31,7 @@ public class PVZController implements ActionListener {
  
 	}
 
+	
 	private PVZGUI gui;  // View
 						// Model
 }
